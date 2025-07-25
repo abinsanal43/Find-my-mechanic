@@ -1,0 +1,55 @@
+{% extends "worker/index.html" %}
+{% block body %}
+<form method="post" action="/wrk_view_booking_post">
+    <table class="pull-right">
+        <tr>
+            <td>
+                <select class="form-control" name="select">
+                    <option>Pending Requests</option>
+                    <option>Approved Requests</option>
+                    <option>Completed Requests</option>
+                </select>
+            </td>
+            <td>
+                <input type="submit" value="Search" class="btn btn-primary">
+            </td>
+        </tr>
+    </table>
+</form>
+    <table class="table table-striped">
+        <tr style="color: #fff;background: #000;">
+            <th>SL NO</th>
+            <th>DATE</th>
+            <th>USER NAME</th>
+            <th>PHONE</th>
+            <th>SERVICE NAME</th>
+            <th>AMOUNT</th>
+            <th></th>
+            <th></th>
+        </tr>
+    {% for i in data %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ i['date'] }}</td>
+            <td>{{ i['name'] }}</td>
+            <td>{{ i['phone'] }}</td>
+            <td>{{ i['service_name'] }}</td>
+            <td>{{ i['amount'] }}</td>
+            <td align="center">
+                {% if i['status'] == 'pending' %}
+                    <a href="/wrk_approve_booking/{{ i['booking_id'] }}" class="btn btn-success" style="width: 100%">Approve</a> <br> <br>
+                    <a href="/wrk_reject_booking/{{ i['booking_id'] }}" class="btn btn-danger" style="width: 100%" onclick="return confirm('Are you sure?')">Reject</a>
+                {% elif i['status'] == 'Approved' %}
+                    <a href="/wrk_complete_booking/{{ i['booking_id'] }}" class="btn btn-warning">Completed</a>
+                {% elif i['status'] == 'Completed' %}
+                    <span style="color: #f00;">Completed</span>
+                {% endif %}
+            </td>
+        <td>
+                <a href="/worker_chat/{{ i['login_id'] }}" class="btn btn-info">Chat</a> <br>
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}

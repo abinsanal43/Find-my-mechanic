@@ -1,0 +1,33 @@
+{% extends "worker/index.html" %}
+{% block body %}
+
+    <table class="table table-striped">
+        <tr style="color: #fff;background: #000;">
+            <th>SL NO</th>
+            <th>USER NAME</th>
+            <th>DATE</th>
+            <th>RATING</th>
+        </tr>
+    {% for i in data %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ i['name'] }}</td>
+            <td>{{ i['date'] }}</td>
+            <td>
+                {% if i['rating'] == "1" %}
+                    ★☆☆☆☆
+                {% elif i['rating'] == "2" %}
+                    ★★☆☆☆
+                {% elif i['rating'] == "3" %}
+                    ★★★☆☆
+                {% elif i['rating'] == "4" %}
+                    ★★★★☆
+                {% elif i['rating'] == "5" %}
+                    ★★★★★
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}

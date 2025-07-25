@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIND MY MECHANIC</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-size: 14px;
+            color: #333;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        select,input:focus {
+            border-color: #4CAF50;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-center a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Register as User</h2>
+    <form action="/user_reg_post" method="POST" onsubmit="return validate()">
+        <div class="input-group">
+            <label for="username">Name</label>
+            <input type="text" id="username" name="username" required placeholder="Enter your name">
+        </div>
+
+        <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email">
+        </div>
+
+        <div class="input-group">
+            <label for="email">Phone</label>
+            <input type="text" pattern="[6789][0-9]{9}" maxlength="10" id="phone" name="phone" required placeholder="Enter your phone">
+        </div>
+
+        <div class="input-group">
+            <label for="email">Place</label>
+            <input type="text" id="place" name="place" required placeholder="Enter your place">
+        </div>
+
+        <div class="input-group">
+            <label for="email">Post</label>
+            <input type="text" id="post" name="post" required placeholder="Enter your post office">
+        </div>
+
+        <div class="input-group">
+            <label for="email">Pin</label>
+            <input type="text" pattern="[6][0-9]{5}" maxlength="6" id="pin" name="pin" required placeholder="Enter your pin">
+        </div>
+
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Create a password">
+        </div>
+
+        <div class="input-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="cpassword" name="cpassword" required placeholder="Confirm your password">
+        </div>
+
+        <button type="submit" class="btn">Register</button>
+    </form>
+
+    <div class="text-center">
+        <p>Already have an account? <a href="/">Login here</a></p>
+    </div>
+</div>
+<script>
+    function validate() {
+        var psw=document.getElementById("password").value;
+        var cpsw=document.getElementById("cpassword").value;
+        if(psw!=cpsw){
+            alert('Password mismatch');
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>find_my_mechanic</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .chat-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+        }
+        .chat-box {
+            height: 400px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #fafafa;
+        }
+        .message {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .message.user {
+            justify-content: flex-end;
+        }
+        .message p {
+            background-color: #e1e1e1;
+            padding: 8px 15px;
+            border-radius: 10px;
+            max-width: 70%;
+        }
+        .message.user p {
+            background-color: #4caf50;
+            color: white;
+            max-width: 300px;
+        }
+        .message.bot p {
+            background-color: #2196f3;
+            color: white;
+            max-width: 300px;
+        }
+        .input-area {
+            display: flex;
+            align-items: center;
+        }
+        .input-area input {
+            width: 85%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+            margin-right: 10px;
+        }
+        .input-area button {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .input-area button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<input type="hidden" id="u" value="{{ uid }}">
+<input type="hidden" id="lmid" value="0">
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <!-- Chat messages will appear here -->
+        </div>
+
+        <div class="input-area">
+            <input type="text" id="message-input" placeholder="Type a message..." />
+            <button type="button" id="chat" onclick="sendMessage2()">Send</button>
+{#            <button onclick="sendMessage()">Send</button>#}
+        </div>
+    </div>
+
+    <script>
+        function sendMessage2() {
+            var messageText = document.getElementById("message-input").value;
+        {#    var k = $("#h").val()#}
+            $.ajax({
+                url: '/woker_send_chat',
+                type: 'POST',
+                data: {msg: messageText},
+                success: function (res) {
+
+                    result = res.status
+                    $("#message-input").val("")
+
+                },
+                error: function (err) {
+                    bb = jQuery.parseJSON(err)
+                }
+
+            });
+
+        }
+        // Optional: Handle 'Enter' key to send message
+        document.getElementById("message-input").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                sendMessage2();
+            }
+        });
+    </script>
+<script type="text/javascript" src="/static/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        var inputField = document.getElementById("message-input");
+        var wid = document.getElementById("u").value;
+        function abc() {
+        var mid=document.getElementById("lmid").value;
+            $.ajax({
+            url: '/worker_chatrply',
+            type: 'post',
+                data : {lmid:mid},
+            success: function (res) {
+                  a = res;
+                  b = a.status;
+                  if (b === "ok") {
+{#                      document.getElementById("chat-box").clear();#}
+                      s = a.data
+                      lmid=a.lmid
+{#                      alert(lmid)#}
+{#                      document.getElementById("lmid").setAttribute("value", lmid);#}
+                      $('#lmid').attr('value', lmid);
+{#                      d = a.id#}
+                      var len = s.length;
+{#                            document.getElementById("chat-box").empty();#}
+                        for (i = 0; i <= len; i++) {
+                            x = s[i];
+                            msg = x.message;
+                            fid=x.from_id;
+                            dtime=x.date;
+                            typ=x.type;
+                            if (typ === "worker") {
+
+                                userMessage = document.createElement("div");
+                                userMessage.classList.add("message", "user");
+                                userMessage.innerHTML = `<p>${msg}</p>`;
+                                document.getElementById("chat-box").appendChild(userMessage);
+{##}
+{#                                // Scroll to the bottom#}
+                                document.getElementById("chat-box").scrollTop = document.getElementById("chat-box").scrollHeight;
+{##}
+                            }
+                            else {
+{##}
+                               botMessage = document.createElement("div");
+                                botMessage.classList.add("message", "bot");
+                                botMessage.innerHTML = `<p>${msg}</p>`;
+                                document.getElementById("chat-box").appendChild(botMessage);
+{##}
+{#                                // Scroll to the bottom#}
+                                document.getElementById("chat-box").scrollTop = document.getElementById("chat-box").scrollHeight;
+                            }
+
+                        }
+                    }
+
+            },
+
+            error: function (err) {
+                bb = jQuery.parseJSON(err)
+                alert("error")
+
+            }
+        });
+
+        }
+        aa=setInterval(abc,1000)
+    });
+
+
+    </script>
+</body>
+</html>

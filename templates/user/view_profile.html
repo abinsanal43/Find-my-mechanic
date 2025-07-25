@@ -1,0 +1,34 @@
+{% extends "user/index.html" %}
+{% block body %}
+<table align="center" style="width: 500px" class="table table-striped">
+    <tr>
+        <td>Name</td>
+        <td>{{ data['name'] }}</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>{{ data['email'] }}</td>
+    </tr>
+    <tr>
+        <td>Phone</td>
+        <td>{{ data['phone'] }}</td>
+    </tr>
+    <tr>
+        <td>Place</td>
+        <td>{{ data['place'] }}</td>
+    </tr>
+    <tr>
+        <td>Post</td>
+        <td>{{ data['post'] }}</td>
+    </tr>
+    <tr>
+        <td>Pin</td>
+        <td>{{ data['pin'] }}</td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center">
+            <a href="/user_edit_profile#content" class="btn btn-success">EDIT PROFILE</a>
+        </td>
+    </tr>
+</table>
+{% endblock %}

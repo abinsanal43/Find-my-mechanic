@@ -1,0 +1,36 @@
+{% extends "user/index.html" %}
+{% block body %}
+<form method="post" action="/user_view_services_post">
+    <table class="pull-right">
+        <tr>
+            <td><input type="text" placeholder="Service name" class="form-control" name="text"/></td>
+            <td><input type="submit" class="btn btn-primary" value="Search"/></td>
+        </tr>
+    </table>
+</form>
+    <table class="table table-striped">
+        <tr style="color: #fff;background: #000;">
+            <th>SL NO</th>
+            <th>SERVICE NAME</th>
+            <th>AMOUNT</th>
+            <th>WORKER NAME</th>
+            <th>PHONE</th>
+            <th>ADDRESS</th>
+            <th></th>
+            <th></th>
+        </tr>
+    {% for i in data %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ i['service_name'] }}</td>
+            <td>{{ i['amount'] }}</td>
+            <td>{{ i['name'] }}</td>
+            <td>{{ i['phone'] }}</td>
+            <td>{{ i['place'] }}<br>{{ i['post'] }}<br>{{ i['pin'] }}</td>
+            <td><a href="/user_view_rating/{{ i['worker_id'] }}" class="btn btn-info">View Rating</a> </td>
+            <td><a href="/user_book_service/{{ i['service_id'] }}" class="btn btn-success" onclick="return confirm('Are you sure?')">Book</a> </td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}

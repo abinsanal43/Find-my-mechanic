@@ -1,0 +1,15 @@
+{% extends "user/index.html" %}
+{% block body %}
+    <form method="post" action="/user_send_feedback_post">
+<table align="center" style="width: 500px" class="table table-striped">
+    <tr>
+        <td><textarea class="form-control" name="textfield" placeholder="Your feedback..." required rows="5" cols="45"></textarea></td>
+    </tr>
+    <tr>
+        <td align="center">
+            <input type="submit" class="btn btn-success" value="SEND" />
+        </td>
+    </tr>
+</table>
+    </form>
+{% endblock %}

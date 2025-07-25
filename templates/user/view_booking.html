@@ -1,0 +1,49 @@
+{% extends "user/index.html" %}
+{% block body %}
+<form method="post" action="/user_view_booking_post">
+    <table class="pull-right">
+        <tr>
+            <td>
+                <select class="form-control" name="select">
+                    <option>Pending Requests</option>
+                    <option>Approved Requests</option>
+                    <option>Completed Requests</option>
+                </select>
+            </td>
+            <td>
+                <input type="submit" value="Search" class="btn btn-primary">
+            </td>
+        </tr>
+    </table>
+</form>
+    <table class="table table-striped">
+        <tr style="color: #fff;background: #000;">
+            <th>SL NO</th>
+            <th>DATE</th>
+            <th>WORKER NAME</th>
+            <th>PHONE</th>
+            <th>SERVICE NAME</th>
+            <th>AMOUNT</th>
+            <th>STATUS</th>
+            <th></th>
+        </tr>
+    {% for i in data %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ i['date'] }}</td>
+            <td>{{ i['name'] }}</td>
+            <td>{{ i['phone'] }}</td>
+            <td>{{ i['service_name'] }}</td>
+            <td>{{ i['amount'] }}</td>
+            <td>{{ i['status'] }}</td>
+            <td>
+                <a href="/user_chat/{{ i['login_id'] }}" class="btn btn-warning" style="width: 100%">Chat</a> <br>
+                {% if i.status == "Completed" %}<br>
+                <a href="/user_send_rating/{{ i['worker_id'] }}" class="btn btn-info" style="width: 100%">Rate</a>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}

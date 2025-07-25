@@ -1,0 +1,21 @@
+{% extends "admin/index.html" %}
+{% block body %}
+
+    <table class="table table-striped">
+        <tr style="color: #fff;background: #000;">
+            <th>SL NO</th>
+            <th>DATE</th>
+            <th>USER</th>
+            <th>FEEDBACK</th>
+        </tr>
+    {% for i in data %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ i['date'] }}</td>
+            <td>{{ i['name'] }}</td>
+            <td>{{ i['feedback'] }}</td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}

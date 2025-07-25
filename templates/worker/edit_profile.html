@@ -1,0 +1,42 @@
+{% extends "worker/index.html" %}
+{% block body %}
+    <form method="post" action="/wrk_edit_profile_post">
+<table align="center" style="width: 500px" class="table table-striped">
+    <tr>
+        <td>Name</td>
+        <td><input type="text" class="form-control" name="textfield" value="{{ data['name'] }}" required /></td>
+    </tr>
+    <tr>
+        <td>Phone</td>
+        <td><input type="text" class="form-control" name="textfield2" pattern="[6789][0-9]{9}" maxlength="10" value="{{ data['phone'] }}" required /></td>
+    </tr>
+    <tr>
+        <td>Place</td>
+        <td><input type="text" class="form-control" name="textfield3" value="{{ data['place'] }}" required /></td>
+    </tr>
+    <tr>
+        <td>Post</td>
+        <td><input type="text" class="form-control" name="textfield4" value="{{ data['post'] }}" required /></td>
+    </tr>
+    <tr>
+        <td>Pin</td>
+        <td><input type="text" class="form-control" name="textfield5" pattern="[6][0-9]{5}" maxlength="6" value="{{ data['pin'] }}" required /></td>
+    </tr>
+    <tr>
+        <td>Category</td>
+        <td>
+            <select id="cat" name="cat" class="form-control">
+                <option {% if data['category'] == "Mechanic" %} selected {% endif %}>Mechanic</option>
+                <option {% if data['category'] == "Electrician" %} selected {% endif %}>Electrician</option>
+                <option {% if data['category'] == "Puncher" %} selected {% endif %}>Puncher</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center">
+            <input type="submit" class="btn btn-success" value="UPDATE"/ >
+        </td>
+    </tr>
+</table>
+    </form>
+{% endblock %}

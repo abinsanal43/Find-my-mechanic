@@ -1,0 +1,139 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rating Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        .rating-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            margin: 0 auto;
+        }
+        .stars {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .feedback-text {
+            margin-top: 10px;
+        }
+        .btn-submit {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .btn-submit:hover {
+            background-color: #45a049;
+        }
+        .rating input {
+            display: none;
+        }
+
+        .rating label {
+            font-size: 30px;
+            color: #ccc;
+            cursor: pointer;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .rating input:checked ~ label {
+            color: #ffc107;
+        }
+
+        .rating input:hover ~ label,
+        .rating input:checked:hover ~ label {
+            color: #ffdb4d;
+        }
+
+        /* Style the star shape */
+        .rating label:before {
+            content: '\2605'; /* Unicode character for star */
+            display: inline-block;
+            font-size: 40px;
+        }
+
+        /* Hover effects for rating stars */
+        .rating input:hover ~ label:before {
+            color: #ffdb4d;
+        }
+
+        /* Optional: Change the color of stars when clicked */
+        .rating input:checked ~ label:before {
+            color: #ffc107;
+        }
+    </style>
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/static/temp/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+    <div class="rating-container">
+        <h3>Please Rate Our Service</h3>
+        <form action="/user_send_rating_post/{{ wid }}" method="POST">
+            <div class="stars">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-2">
+                        <input type="radio" id="star1" name="rating" value="1">
+                        </div>
+                        <div class="col-lg-10"> <p style="font-size: 16px"> ★☆☆☆☆</p>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                        <input type="radio" id="star2" name="rating" value="2">
+                        </div>
+                        <div class="col-lg-10"><p style="font-size: 16px"> ★★☆☆☆</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                        <input type="radio" id="star3" name="rating" value="3">
+                        </div>
+                        <div class="col-lg-10"><p style="font-size: 16px"> ★★★☆☆</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                        <input type="radio" id="star4" name="rating" value="4">
+                        </div>
+                        <div class="col-lg-10"><p style="font-size: 16px"> ★★★★☆</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                        <input type="radio" id="star5" name="rating" value="5">
+                        </div>
+                        <div class="col-lg-10"><p style="font-size: 16px"> ★★★★★</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div>
+                <button type="submit" class="btn-submit" style="">Submit Rating</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

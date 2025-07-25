@@ -1,0 +1,23 @@
+{% extends "worker/index.html" %}
+{% block body %}
+
+    <table class="table table-striped">
+        <tr style="color: #fff;background: #000;">
+            <th>SL NO</th>
+            <th>SERVICE NAME</th>
+            <th>AMOUNT</th>
+            <th></th>
+            <th></th>
+        </tr>
+    {% for i in data %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>{{ i['service_name'] }}</td>
+            <td>{{ i['amount'] }}</td>
+            <td><a href="/wrk_edit_service/{{ i['service_id'] }}" class="btn btn-info">Edit</a> </td>
+            <td><a href="/wrk_delete_service/{{ i['service_id'] }}" class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</a> </td>
+        </tr>
+    {% endfor %}
+    </table>
+
+{% endblock %}
